@@ -145,7 +145,26 @@ class App extends React.Component {
               <div className="listmap">
                 <div className="mypage-nav">
                   <span className="new-map" onClick={this.handleClickAddNewMap}>
-                    <i className="fas fa-plus"></i>
+                    <i className="fas fa-plus">
+                        <div className="form">
+                        <span>
+                            
+                        </span>
+                            <form className="form-input">
+                                <label className="form-text">New Map</label>
+                                <input type="text" className="input-text"/>
+                                <select>
+                                    <option value="0">team1</option>
+                                    <option value="1">team2</option>
+                                    <option value="2">team3</option>
+                                </select>
+                                <div className="btn-form">
+                                    <button>Cancel</button>
+                                    <button>Ok</button>
+                                </div>
+                            </form>
+                        </div>
+                    </i>
                   </span>
                   <span className="refresh">
                     <i className="fas fa-redo-alt"></i>
