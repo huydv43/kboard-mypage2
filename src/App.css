@@ -489,11 +489,13 @@ label{
 /* form input*/
 .form {
     margin-top: 100px;
+    margin-left: 300px;
     display: block;
     position: absolute;
     width: 300px;
-    height: 300px;
+    height: 150px;
     background-color:rgb(124, 122, 122);
+    border-radius: 8px;
 }
 .form-input{
     display: flex;
@@ -502,11 +504,15 @@ label{
 .btn-form{
     display: flex;
     flex-direction: row;
-    align-items: center;
+    
 }
 .form-text{
     text-align: center;
     font-size: 20px;
     color: white;
 
+}
+.fa-times-circle{
+    color: black;
+    float: right;
 }
