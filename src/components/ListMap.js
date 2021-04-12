@@ -6,20 +6,16 @@ class ListMap extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            
-            actionCurrent: null
+            actionCurrent: null,
+            actionStatus: false
         }
     }
     handldeClickAction = (id) =>{
-        this.setState({
-            actionCurrent : id
-        })
         
     }
     render() {
-        // const {showActionStatus} = this.state;
-        const {actionCurrent} = this.state;
-        console.log(this.state.actionCurrent)
+        const {actionCurrent,actionStatus} = this.state;
+        // console.log(this.state.actionCurrent)
         let maps = this.props.mapData; 
         return (
             <div className="mypage-content">

@@ -332,7 +332,7 @@ h3{
     border-left: 10px solid rgb(139, 137, 137);
 }
 .toggle-trigle-2{
-    position: relative;
+    /* position: relative; */
     margin-top: 6px;
     margin-left: 20px;
     width: 0;
@@ -442,13 +442,13 @@ label{
 .action-menu-block{
     z-index: 999;
     display: block;
-    height: 50px;
+    height: 65px;
     width: 130px;
     background-color: rgb(22, 21, 21);
     position: absolute;
-    border-radius: 8px;
-    margin-left: 56%;
-    margin-top: 1%;
+    border-radius: 6px;
+    margin-left: -253%;
+    margin-top: 5%;
 }
 .action-menu-block > span:hover{
     background-color: teal;
@@ -456,6 +456,7 @@ label{
     
 }
 .rename{
+    margin-top: 6px;
     border-radius: 6px;
     width: 125px;
     height: 15px;
@@ -465,6 +466,17 @@ label{
     padding: 2px;
     text-align: center;
 }
+.delete{
+    border-radius: 6px;
+    width: 125px;
+    height: 15px;
+    color: white;
+    font-size: 12px;
+    display: inline-block;
+    padding: 2px;
+    text-align: center;
+}
+
 .copy{
     border-radius: 6px;
     width: 125px;
@@ -521,7 +533,7 @@ label{
     border-left: none;
     border-bottom: .7px solid #333;
     align-items: baseline;
-    /* position: relative; */
+    position: relative;
     
 }
 .paral-icon:focus {

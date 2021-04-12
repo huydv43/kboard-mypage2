@@ -22,7 +22,7 @@ class MenuLeft extends React.Component {
                             ({this.props.numberMap})
                         </span>
                     </div>
-                    <div className="recent-maps">
+                    <div className="recent-maps" onClick={this.props.handleClickRecentMap}>
                         <span>
                             <img src="./image/ic-recentmap.svg" alt="recents-map" className="icon-recent-map" />
                         </span>

@@ -16,6 +16,7 @@ class App extends React.Component {
             numberBookMark: null,
             toggle: true,
             showFormStatus:false,
+            recentMaps: []
         }
         this.inputName = React.createRef();
         this.inputTeam = React.createRef();
@@ -27,6 +28,7 @@ class App extends React.Component {
             numberMap: MAP_DATA.length,
             currentMap: MAP_DATA[0],
             numberBookMark: MAP_DATA.filter((map) => map.bookmark === true),
+            // recentMaps:[]
         });
     }
     handleClickAll = () => {
@@ -124,13 +126,14 @@ class App extends React.Component {
         const currentDate = monthNamesShort[day.getMonth()] + " " + day.getDate() + "," + " " + day.getFullYear();
         const currentTime = day.getHours() + ":" + day.getMinutes();
         this.setState({
-            mapData: this.state.mapData.map((map) => {
-                if (map.id === id) {
-                    map.date = currentDate;
-                    map.time = currentTime;
-                }
-                return map;
-            }),
+          mapData: this.state.mapData.map((map) => {
+            if (map.id === id) {
+              map.date = currentDate;
+              map.time = currentTime;
+            }
+            return map;
+          }),
+          recentMap: this.state.recentMaps.push(id),
         });
     }
     handleGetInfoMap = (id) => {
@@ -138,8 +141,10 @@ class App extends React.Component {
             currentMap: MAP_DATA.find((map) => map.id === id),
         });
     }
-    handleClickActionMenu = (id) => {
-        
+    handleClickRecentMap = () => {
+        this.setState({
+          // mapData: this.state.recentMaps
+        })
     }
 
 
@@ -149,6 +154,7 @@ class App extends React.Component {
         const { mapData, teamData, numberBookMark, numberMap, toggle, currentMap,showFormStatus } = this.state;
         let hiddenForm = "form-add-map-none";
         let showForm = "form-add-map-block";
+        console.log(this.state.recentMaps);
         return (
             <div>
                 <div className="app">
@@ -168,6 +174,7 @@ class App extends React.Component {
                                     handleClickAll={this.handleClickAll}
                                     handleClickTeam={this.handleClickTeam}
                                     handleClickToggle={this.handleClickToggle}
+                                    handleClickRecentMap={this.handleClickRecentMap}
                                 />
                             )}
                         </div>
