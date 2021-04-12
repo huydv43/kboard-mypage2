@@ -4,13 +4,14 @@ class Map extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            toggleStar: true
+            toggleStar: true,
+            showActionStatus: false,
         }
     }
     handleClickStar = () => {
         this.props.handleSetBookMark(this.props.map.id)
         this.setState({
-            toggleStar: !this.state.toggleStar
+            toggleStar: !this.state.toggleStar,
         })
     }
     handleClickMap = () =>{
@@ -19,13 +20,24 @@ class Map extends React.Component {
     handleGetInfoMap = () =>{
         this.props.handleGetInfoMap(this.props.map.id)
     }
+    handleClickAction = () => {
+        this.props.handldeClickAction(this.props.map.id);
+        this.setState({
+            showActionStatus:!this.state.showActionStatus
+        })
+    }
     render() {
         const {toggleStar} = this.state;
         let star = "fa-star";
         let starYellow = "star-yellow";
         let map = this.props.map;
+        let actionCurrent = this.props.actionCurrent;
+        // let actionStatus = this.props.showActionStatus;
+        let showAction = "action-menu";
+        let hiddenAction = "action-menu-block";
         return (
-            <div className="item" onClick={this.handleGetInfoMap}> 
+            // <div></div>
+            <div className="item" onClick={this.handleGetInfoMap}>
                 <div className="icon">
                     <span>
                         <i className={toggleStar ?
@@ -50,16 +62,12 @@ class Map extends React.Component {
                 
                 <div className="action">
                     <div className="action-map">
-                        <button className="paral-icon">
+                        <button className="paral-icon" onClick={this.handleClickAction}>
                             <span>
                                 <i className="fas fa-bars"></i>
                             </span>
                             <div className="trigle2">
-                                <div className="action-menu">
-                                    <span>Rename</span>
-                                    <span>Make a Copy</span>
-                                    <span>Delete</span>
-                                </div>
+                                
                             </div>
                         </button>
                         <div className="paral">
@@ -83,9 +91,13 @@ class Map extends React.Component {
                             <button className="open-map" onClick={this.handleClickMap}>
                                 Open the Map
                             </button>
-                        </div>
+                    </div>
+                    
                 </div>
-                
+                <div className={ actionCurrent === this.props.map.id ? hiddenAction : showAction}>
+                        <span className="rename">Rename</span>
+                        <span className="copy">Make a Copy</span>
+                </div>
             </div>
         )
     }

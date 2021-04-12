@@ -9,7 +9,7 @@ class MenuLeft extends React.Component {
         let dropDownNone = "team-item";
         let dropDownBlock = "team-item-block";
         return(
-            <div>
+            <div className="wrapper-menu">
                 <div className="menu-top">
                     <div className="all-map" onClick={this.props.handleClickAll}>
                         <span >

@@ -29,12 +29,13 @@ h1 {
     flex-direction: row;
 }
 .menu {
-    box-shadow: 10px -7px rgb(33, 37, 41,.15);
+    box-shadow: 5px 0px rgb(33, 37, 41,.15);
     flex-grow:1;
     height: 127px;
     /* width: 240px; */
     border-bottom:1px solid rgb(33, 37, 41);
     border-right:1px solid rgb(33, 37, 41);
+    background-color: rgb(230,230,230);
     
 }
 .listmap {
@@ -205,9 +206,13 @@ h3{
     /* width: 220px; */
 }
 /*manu left */
+.wrapper-menu{
+    /* background-color: rgb(230,230,230); */
+    /* border-right: 3px solid #333; */
+}
 .menu-top {
     display: block;
-    background-color: rgb(224,224,224);
+    /* background-color: rgb(224,224,224); */
     
 }
 .all-map{
@@ -409,7 +414,7 @@ h3{
     color: white;
     margin-top: 15px;
     height: 30px;
-    width: 50%;
+    width: 60%;
     background-color:rgb(102, 102, 102);
     border: none;
     border-radius: 5px;
@@ -431,12 +436,50 @@ label{
 }
 .action-menu{
     display: none;
-    flex-grow: 1;
+
 
 }
+.action-menu-block{
+    z-index: 999;
+    display: block;
+    height: 50px;
+    width: 130px;
+    background-color: rgb(22, 21, 21);
+    position: absolute;
+    border-radius: 8px;
+    margin-left: 56%;
+    margin-top: 1%;
+}
+.action-menu-block > span:hover{
+    background-color: teal;
+    cursor: pointer;
+    
+}
+.rename{
+    border-radius: 6px;
+    width: 125px;
+    height: 15px;
+    color: white;
+    font-size: 12px;
+    display: inline-block;
+    padding: 2px;
+    text-align: center;
+}
+.copy{
+    border-radius: 6px;
+    width: 125px;
+    height: 15px;
+    color: white;
+    display: inline-block;
+    font-size: 12px;
+    padding: 2px;
+    text-align: center;
+}
+
 .action-map{
     display: flex;
     flex-direction: row-reverse;
+    /* position: relative; */
 }
 .paral{
   margin-right: 4px;
@@ -478,6 +521,8 @@ label{
     border-left: none;
     border-bottom: .7px solid #333;
     align-items: baseline;
+    /* position: relative; */
+    
 }
 .paral-icon:focus {
     outline: none;
@@ -487,32 +532,113 @@ label{
 }
 
 /* form input*/
-.form {
-    margin-top: 100px;
-    margin-left: 300px;
-    display: block;
-    position: absolute;
-    width: 300px;
-    height: 150px;
-    background-color:rgb(124, 122, 122);
-    border-radius: 8px;
-}
-.form-input{
-    display: flex;
-    flex-direction: column;
-}
+
+
+
+
+
 .btn-form{
     display: flex;
     flex-direction: row;
     
 }
+.btn-ok{
+    background-color: rgb(47,45,45);
+    width: 100px;
+    height: 36px;
+    margin-left: 10px;
+    margin: 10px;
+    color: white;
+    font-size: 18px;
+    font-family: sans-serif;
+    border-radius: 5px;
+}
+.btn-cancel{
+    height: 36px;
+    width: 100px;
+    background-color: rgb(100, 99, 99);
+    margin-left: 103px;
+    margin-top: 10px;
+    color: rgb(83, 82, 82);
+    font-size: 18px;
+    font-family: sans-serif;
+    border-radius: 5px;
+}
 .form-text{
     text-align: center;
     font-size: 20px;
-    color: white;
-
+    color: black;
+    text-align: left;
+    margin-left: 24px;
+    margin-top: 30px;
 }
 .fa-times-circle{
     color: black;
     float: right;
+    font-size: 22px;
+    margin-top: 5px;
+}
+.input-text{
+    width: 353px;
+    height: 30px;
+    border-radius: 5px;
+    margin-left: 22px;
+    
+    border: .7px solid rgb(230,241,240);
+    background-color: rgb(230,241,240);
+    padding-left: 20px;
+}
+.input-text:focus{
+    outline: none;
+}
+.form-option{
+    width: 356px;
+    height: 25px;
+    border-radius: 5px;
+    background-color: rgb(63, 61, 61);
+    margin-left: 23px;
+    margin-top: 10px;
+    color: white;
+}
+.form-option:focus{
+    outline: none;
+}
+.form-add-map-none {
+    display: none;
+}
+.wrapper-form{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(33, 37, 41);
+    opacity: 0.5;
+}
+.form-content{
+    position: absolute;
+    height: 237px;
+    width: 432px;
+    margin-left: 437px;
+    margin-top: 20%;
+    border: .3px solid #3333;
+    background-color: rgb(232,232,232);
+    border-radius: 8px;
+}
+.form-input{
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+    width: 411px;
+    margin-top: 24px;
+    border: .5px solid #3333;
+    border-radius: 4px;
+    background-color: rgb(253,253,253);
+
+}
+.form-add-map-block{
+    margin-top: -735px;
+    width: 100%;
+    height: 100%;
+    background-color:#e8e8e8;
+    display: block;
 }

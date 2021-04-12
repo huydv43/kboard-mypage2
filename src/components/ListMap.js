@@ -3,9 +3,24 @@ import Map from './Map'
 import MapDetail from './MapDetail'
 
 class ListMap extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            
+            actionCurrent: null
+        }
+    }
+    handldeClickAction = (id) =>{
+        this.setState({
+            actionCurrent : id
+        })
+        
+    }
     render() {
+        // const {showActionStatus} = this.state;
+        const {actionCurrent} = this.state;
+        console.log(this.state.actionCurrent)
         let maps = this.props.mapData; 
-        console.log(maps)       
         return (
             <div className="mypage-content">
                 <div className="templates-map">
@@ -17,6 +32,9 @@ class ListMap extends React.Component {
                                 handleSetBookMark={this.props.handleSetBookMark}
                                 handleOpenMap={this.props.handleOpenMap}
                                 handleGetInfoMap={this.props.handleGetInfoMap}
+                                // showActionStatus={showActionStatus}
+                                handldeClickAction={this.handldeClickAction}
+                                actionCurrent={actionCurrent}
                             />
                         ))
                     }
@@ -26,6 +44,7 @@ class ListMap extends React.Component {
                         currentMap={this.props.currentMap}
                     />
                 </div>
+                
             </div>
         )
     }
