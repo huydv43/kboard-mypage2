@@ -8,7 +8,7 @@ class Form extends React.Component {
     render() {
         const {formRename,inputName,} = this.props;
         let hiddenForm = "form-add-map-none";
-        let showForm = "form-add-map-block";
+        let showForm = "form-add-map-block-2";
         return (
             <div>
                 <div className={formRename ? showForm : hiddenForm}>

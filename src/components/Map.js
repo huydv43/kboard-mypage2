@@ -27,7 +27,7 @@ class Map extends React.Component {
     }
     handleGetIdMap = () => {
         this.props.handleClickShowFormRename(this.props.map.title)
-        this.props.handleRename(this.props.map.id)
+        // this.props.handleRename(this.props.map.id)
     }
     handleClickMakeCopy = () => {
         this.props.handleClickShowFormCopy(this.props.map.title)

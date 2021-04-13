@@ -136,17 +136,21 @@ class App extends React.Component {
             showFormAdd: false
         })
     }
-    handleRename = (id) => {
+    handleRename = (e) => {
+        e.preventDefault();
+        let title = this.state.editMap;
         let newNameMap = this.inputName.current.value;
-        console.log(newNameMap)
-        this.state.mapData.map((map) => {
-                if (map.id === id) {
-                    map.title = newNameMap
-                    return map;
-                }
-            })
-        
-        
+        this.state.mapData.filter((map) => {
+            if(map.title === title){
+                map.title = newNameMap
+            }
+          })
+          this.setState({
+              mapData:this.state.mapData
+          })
+          
+
+
     }
     onChangeMapTitle = value => {
         this.setState({
