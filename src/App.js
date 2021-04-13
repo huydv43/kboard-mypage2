@@ -4,6 +4,8 @@ import ListMap from './components/ListMap'
 import MenuLeft from './components/MenuLeft'
 import MAP_DATA from "./data/MapData";
 import TEAM_DATA from '././data/TeamData'
+import Form from './components/Form'
+import FormRename from './components/FormRename'
 import './App.css'
 class App extends React.Component {
     constructor(props) {
@@ -15,8 +17,13 @@ class App extends React.Component {
             numberMap: null,
             numberBookMark: null,
             toggle: true,
-            showFormStatus:false,
-            recentMaps: []
+            showFormAdd: false,
+            showFormCopy: false,
+            formRename: false,
+            hiddenSelectTeam: false,
+            recentMaps: [],
+            editMap: "",
+            
         }
         this.inputName = React.createRef();
         this.inputTeam = React.createRef();
@@ -28,8 +35,10 @@ class App extends React.Component {
             numberMap: MAP_DATA.length,
             currentMap: MAP_DATA[0],
             numberBookMark: MAP_DATA.filter((map) => map.bookmark === true),
-            // recentMaps:[]
         });
+    }
+    changeInputteam = (select) => {
+        this.inputTeam = select;
     }
     handleClickAll = () => {
         this.setState({
@@ -44,9 +53,6 @@ class App extends React.Component {
               ),
         });
     }
-    handleClickRecentMap = () => {
-
-    }
     handleClickTeam = (x) => {
         this.setState({
             mapData: MAP_DATA.filter((map) => map.team === x),
@@ -59,18 +65,26 @@ class App extends React.Component {
     }
     handleClickShowForm = () => {
         this.setState({
-            showFormStatus: true
+            showFormCopy: true,
+            hiddenSelectTeam: false
         })
     }
     handleClickCloseForm = () => {
         this.setState({
-            showFormStatus:false
+            showFormCopy:false
         })
     }
+    handleClickCloseFormRename = () => {
+        this.setState({
+            formRename:false
+        })
+    }
+    
     handleClickAddNewMap = (event) => {
         event.preventDefault();
         let nameMap = this.inputName.current.value;
         let teamMap = this.inputTeam.value;
+        console.log(nameMap)
         if(nameMap === '') {
             console.log("ban can nhap ten map");
         }
@@ -105,6 +119,41 @@ class App extends React.Component {
         }
         
     }
+    handleClickShowFormCopy = (title) => {
+        this.setState({
+            editMap: title,
+            showFormCopy: true,
+            formRename: false,
+            hiddenSelectTeam: true
+        })
+        
+    }
+    handleClickShowFormRename = (title) => {
+        this.setState({
+            editMap: title,
+            formRename: true,
+            showFormCopy:false,
+            showFormAdd: false
+        })
+    }
+    handleRename = (id) => {
+        let newNameMap = this.inputName.current.value;
+        console.log(newNameMap)
+        this.state.mapData.map((map) => {
+                if (map.id === id) {
+                    map.title = newNameMap
+                    return map;
+                }
+            })
+        
+        
+    }
+    onChangeMapTitle = value => {
+        this.setState({
+            editMap: value
+        })
+    }
+    
     handleSetBookMark = (id) => {
         this.setState({
             mapData: this.state.mapData.map((map) => {
@@ -133,7 +182,7 @@ class App extends React.Component {
             }
             return map;
           }),
-          recentMap: this.state.recentMaps.push(id),
+          recentMaps: this.state.recentMaps.concat(this.state.mapData.filter((map) => map.id === id))
         });
     }
     handleGetInfoMap = (id) => {
@@ -143,7 +192,7 @@ class App extends React.Component {
     }
     handleClickRecentMap = () => {
         this.setState({
-          // mapData: this.state.recentMaps
+            mapData: this.state.recentMaps
         })
     }
 
@@ -151,83 +200,83 @@ class App extends React.Component {
 
 
     render() {
-        const { mapData, teamData, numberBookMark, numberMap, toggle, currentMap,showFormStatus } = this.state;
-        let hiddenForm = "form-add-map-none";
-        let showForm = "form-add-map-block";
-        console.log(this.state.recentMaps);
+        const { mapData, teamData, numberBookMark, numberMap, toggle, currentMap,showFormCopy,recentMaps, hiddenSelectTeam, editMap,formRename } = this.state;
         return (
-            <div>
-                <div className="app">
-                    <div>
-                        <Header />
+            <div className="app">
+                <div>
+                    <Header />
+                </div>
+                <div className="main">
+
+                    <div className="menu">
+                        {teamData && teamData.length > 0 && (
+                            <MenuLeft
+                                teamData={teamData}
+                                mapData={mapData}
+                                toggle={toggle}
+                                numberBookMark={numberBookMark}
+                                numberMap={numberMap}
+                                handleClickBookMarks={this.handleClickBookMarks}
+                                handleClickAll={this.handleClickAll}
+                                handleClickTeam={this.handleClickTeam}
+                                handleClickToggle={this.handleClickToggle}
+                                handleClickRecentMap={this.handleClickRecentMap}
+                                recentMaps={recentMaps}
+                            />
+                        )}
                     </div>
-                    <div className="main">
-                        <div className="menu">
-                            {teamData && teamData.length > 0 && (
-                                <MenuLeft
-                                    teamData={teamData}
+                    <div className="listmap">
+                        <div className="mypage-nav">
+                            <span className="new-map" onClick={this.handleClickShowForm}>
+                                <i className="fas fa-plus"></i>
+                            </span>
+                            <span className="refresh">
+                                <i className="fas fa-redo-alt"></i>
+                            </span>
+                        </div>
+                        <div className="main-content">
+                            {(mapData && mapData.length) > 0 && (
+                                <ListMap
+                                    handleCopy={this.handleCopy}
                                     mapData={mapData}
-                                    toggle={toggle}
+                                    teamData={teamData}
                                     numberBookMark={numberBookMark}
                                     numberMap={numberMap}
-                                    handleClickBookMarks={this.handleClickBookMarks}
-                                    handleClickAll={this.handleClickAll}
-                                    handleClickTeam={this.handleClickTeam}
-                                    handleClickToggle={this.handleClickToggle}
-                                    handleClickRecentMap={this.handleClickRecentMap}
+                                    handleSetBookMark={this.handleSetBookMark}
+                                    currentMap={currentMap}
+                                    handleOpenMap={this.handleOpenMap}
+                                    handleGetInfoMap={this.handleGetInfoMap}
+                                    handleClickShowFormCopy={this.handleClickShowFormCopy}
+                                    handleClickShowFormRename={this.handleClickShowFormRename}
+                                    handleRename={this.handleRename}
+                                    
                                 />
                             )}
                         </div>
-                        <div className="listmap">
-                            <div className="mypage-nav">
-                                <span className="new-map" onClick={this.handleClickShowForm}>
-                                    <i className="fas fa-plus"></i>
-                                </span>
-                                <span className="refresh">
-                                    <i className="fas fa-redo-alt"></i>
-                                </span>
-                            </div>
-                            <div className="main-content">
-                                {(mapData && mapData.length) > 0 && (
-                                    <ListMap
-                                        mapData={mapData}
-                                        teamData={teamData}
-                                        numberBookMark={numberBookMark}
-                                        numberMap={numberMap}
-                                        handleSetBookMark={this.handleSetBookMark}
-                                        currentMap={currentMap}
-                                        handleOpenMap={this.handleOpenMap}
-                                        handleGetInfoMap={this.handleGetInfoMap}
-                                    />
-                                )}
-                            </div>
-                        </div>
                     </div>
                 </div>
-                <div className={showFormStatus ? showForm : hiddenForm}>
-                    <div className="wrapper">
-                        <div className="wrapper-form"></div>
-                        <div className="form-content">
-                            <span className="container-icon-delete" onClick={this.handleClickCloseForm}>
-                                <i className="fas fa-times-circle" ></i>
-                            </span> 
-                            <form className="form-input" onSubmit={this.handleClickAddNewMap}>
-                                
-                                <label className="form-text">New Map</label>
-                                <input type="text" ref={this.inputName} className="input-text" placeholder="New Map"/>
-                                <select className="form-option" ref={(input) => this.inputTeam = input}>
-                                    <option value="team1">team1</option>
-                                    <option value="team2">team2</option>
-                                    <option value="team3">team3</option>
-                                </select>
-                                <div className="btn-form">
-                                    <button className="btn-cancel" onClick={this.handleClickCloseForm}>Cancel</button>
-                                    <button className="btn-ok" type="submit" onClick={this.handleClickCloseForm}>Ok</button>
-                                </div>
-                            </form>
-                        </div>
-                        </div>  
-                </div>
+                <Form 
+                    onChange={this.onChangeMapTitle}
+                    handleClickShowForm={this.handleClickShowForm}
+                    showFormCopy={showFormCopy}
+                    handleClickCloseForm={this.handleClickCloseForm}
+                    hiddenSelectTeam={hiddenSelectTeam}
+                    editmap={editMap}
+                    handleRename={this.handleRename}
+                    handleClickAddNewMap={this.handleClickAddNewMap}
+                    inputTeam={this.inputName}           
+                    inputName={this.inputName}
+                    changeInputteam={this.changeInputteam}
+                />
+                <FormRename 
+                    formRename={formRename}
+                    inputName={this.inputName}
+                    editmap={editMap}
+                    handleClickCloseFormRename={this.handleClickCloseFormRename}
+                    inputName={this.inputName}
+                    onChange={this.onChangeMapTitle}
+                    handleRename={this.handleRename}
+                />
             </div>
         );
     }

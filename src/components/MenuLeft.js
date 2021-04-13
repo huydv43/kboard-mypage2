@@ -29,6 +29,9 @@ class MenuLeft extends React.Component {
                         <strong className="text-recent">
                             Recent Maps
                         </strong>
+                        <span className="total-recent-map">
+                            ({this.props.recentMaps.length})
+                        </span>
                     </div>  
                     <div className="bookmarks" onClick={this.props.handleClickBookMarks}>
                         <span>

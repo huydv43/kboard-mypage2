@@ -5,7 +5,7 @@ class Map extends React.Component {
         super(props)
         this.state = {
           toggleStar: true,
-          actionStatus: false
+          
         };
     }
     handleClickStar = () => {
@@ -25,8 +25,16 @@ class Map extends React.Component {
         this.props.handldeClickAction(this.props.map.id)
         
     }
+    handleGetIdMap = () => {
+        this.props.handleClickShowFormRename(this.props.map.title)
+        this.props.handleRename(this.props.map.id)
+    }
+    handleClickMakeCopy = () => {
+        this.props.handleClickShowFormCopy(this.props.map.title)
+    }
     render() {
         const {toggleStar,} = this.state;
+        const {actionCurrent, actionStatus} = this.props;
         let star = "fa-star";
         let starYellow = "star-yellow";
         let map = this.props.map;
@@ -64,12 +72,12 @@ class Map extends React.Component {
                   <div className="trigle2"></div>
                   <div
                     className={
-                        this.props.map.actionStatus ===true
+                        (actionStatus ===true) && (actionCurrent === map.id)
                         ? hiddenAction
                         : showAction
                         }>
-                    <span className="rename">Rename</span>
-                    <span className="copy">Make a Copy</span>
+                    <span className="rename" onClick={this.handleGetIdMap}>Rename</span>
+                    <span className="copy" onClick={this.handleClickMakeCopy}>Make a Copy</span>
                     <span className="delete">Delete</span>
                   </div>
                 </button>
